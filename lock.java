@@ -9,7 +9,7 @@ import javax.crypto.*;
 import javax.crypto.spec.*;
 
 public class lock {
-    private static byte[] salt = "".getBytes(); /* "April72020".getBytes();*/
+    private static byte[] salt ="April72020".getBytes(); //"".getBytes(); /* "April72020".getBytes();*/
     public static void encrypt() throws IllegalBlockSizeException, BadPaddingException{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter password: ");
@@ -35,14 +35,14 @@ public class lock {
             cipher.init(Cipher.ENCRYPT_MODE, secret, new IvParameterSpec(new byte[16]));
             Files.walk(folder).filter(Files::isRegularFile).forEach(file -> {
                 try {
-                    if (file.getFileName().toString().endsWith(".ninja")) {
+                    if (file.getFileName().toString().endsWith(".nb")) {
                         System.out.println("files already encrypted!");
                         System.exit(-1);
                     }
 
                     byte[] input = Files.readAllBytes(file);
                     byte[] output = cipher.doFinal(input);
-                    Path encryptedFile = folder.resolve(file.getFileName().toString() + ".ninja");
+                    Path encryptedFile = folder.resolve(file.getFileName().toString() + ".nb");
                     Files.write(encryptedFile, output);
                     Files.delete(file);
                 } catch (IOException | GeneralSecurityException e) {
@@ -78,11 +78,11 @@ public class lock {
             // decrypt all files in the folder
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, secret, new IvParameterSpec(new byte[16]));
-            Files.walk(folder).filter(file -> file.toString().endsWith(".ninja")).forEach(file -> {
+            Files.walk(folder).filter(file -> file.toString().endsWith(".nb")).forEach(file -> {
                 try {
                     byte[] input = Files.readAllBytes(file);
                     byte[] output = cipher.doFinal(input);
-                    Path decryptedFile = folder.resolve(file.getFileName().toString().replace(".ninja", ""));
+                    Path decryptedFile = folder.resolve(file.getFileName().toString().replace(".nb", ""));
                     Files.write(decryptedFile, output);
                     Files.delete(file);
                 } catch (IOException | GeneralSecurityException e) {
