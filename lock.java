@@ -14,7 +14,7 @@ public class lock {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        String folderPath = "N:/program_files/vault"; // change this to your folder path
+        String folderPath = "enter folder desitination to be encrypted"; // change this to your folder path
         
         try {
             Path folder = Paths.get(folderPath);
