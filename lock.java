@@ -9,7 +9,7 @@ import javax.crypto.*;
 import javax.crypto.spec.*;
 
 public class lock {
-    private static byte[] salt ="April72020".getBytes(); //"".getBytes(); /* "April72020".getBytes();*/
+    private static byte[] salt ="Enter a random word here(not passowrd)".getBytes(); //"".getBytes(); /* "April72020".getBytes();*/
     public static void encrypt() throws IllegalBlockSizeException, BadPaddingException{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter password: ");
